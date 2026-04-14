@@ -1,9 +1,9 @@
 # NLP-Powered Risk Management Dashboard
 
-An end-to-end NLP pipeline built at Kimberly-Clark AI Labs (2021–2024) to replace a $420,000/year third-party social listening vendor with an in-house GPT-4 powered system.
+An end-to-end NLP pipeline built at Kimberly-Clark AI Labs (2021–2024) to replace a $500,000/year third-party social listening vendor with an in-house GPT-4 powered system.
 
 ## Results
-- 60% → 92% classification accuracy (upgraded from RoBERTa to fine-tuned GPT-4)
+- 80% → 95% classification accuracy (upgraded from RoBERTa to fine-tuned GPT-4)
 - 90% reduction in vendor costs
 - Adopted by APAC and US teams as a regional standard
 
