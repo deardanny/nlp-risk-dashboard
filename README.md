@@ -13,13 +13,13 @@ The pipeline monitors diaper brand mentions across Korean parenting communities 
 
 ## Pipeline Components
 
-| File | Description |
-|------|-------------|
-| `brand-classification` | Crawls community posts, detects brand mentions via keyword matching, flags leakage and contamination risk signals |
-| `trend-analysis` | Extracts trending consumer topics from non-brand posts using GPT-4 keyword extraction |
-| `weekly-brand-summary` | Generates weekly GPT-4 summaries of brand-related discussions per brand |
-| `internal-review-analysis` | Analyzes internal product reviews: extracts satisfaction/dissatisfaction keywords, generates property scores and summaries, detects risk keywords |
-| `competitor-review-analysis` | Same analysis pipeline applied to competitor brand reviews |
+| Notebook | English version | Description |
+|---|---|---|
+| [brand-classification](brand-classification.ipynb) | [English](brand-classification_en.ipynb) | Reads collected community posts from Snowflake, detects brand mentions via keyword matching, flags leakage and contamination risk signals |
+| [trend-analysis](trend-analysis.ipynb) | [English](trend-analysis_en.ipynb) | Extracts trending consumer topics from non-brand posts using GPT-4 keyword extraction |
+| [weekly-brand-summary](weekly-brand-summary.ipynb) | [English](weekly-brand-summary_en.ipynb) | Generates weekly GPT-4 summaries of brand-related discussions per brand |
+| [internal-review-analysis](internal-review-analysis.ipynb) | [English](internal-review-analysis_en.ipynb.ipynb) | Analyzes internal product reviews: extracts satisfaction/dissatisfaction keywords, generates property scores and summaries, detects risk keywords |
+| [competitor-review-analysis](competitor-review-analysis.ipynb) | [English](competitor-review-analysis_en.ipynb) | Same analysis pipeline applied to competitor brand reviews |
 
 Each component has an `_en` version using English-transliterated keywords for readability. The original pipeline ran on Korean community data.
 
