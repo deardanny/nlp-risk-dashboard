@@ -1,4 +1,4 @@
-# NLP-Powered Risk Management Dashboard
+# Consumer Intelligence & Risk Analytics — NLP / LLM Platform
 
 An in-house NLP and LLM platform developed at Kimberly-Clark (Yuhan-Kimberly) AI Labs (2021–2024) to turn consumer feedback into product insights and earlier quality-risk signals.
 
@@ -31,6 +31,12 @@ The pipeline monitors diaper brand mentions across Korean parenting communities 
 | [competitor-review-analysis](competitor-review-analysis.ipynb) | [English](competitor-review-analysis_en.ipynb) | Same analysis pipeline applied to competitor brand reviews |
 
 Each component has an `_en` version using English-transliterated keywords for readability. The original pipeline ran on Korean community data.
+
+## Reading guide
+
+This repository contains five pipeline components with Korean and English-readable notebook variants. Use the table above to open each component. The repository contains pipeline code; the Power BI workbook, original datasets, and original evaluation environment are not bundled. The public case study and dashboard demonstration are linked at the top.
+
+Start with brand classification before reading the weekly brand summary. Trend extraction and the two review-analysis notebooks describe the other processing branches. Review each notebook’s imports, environment variables, and placeholder table names before running it with your own authorized data.
 
 ## Tech Stack
 - Python, OpenAI GPT-4 API
