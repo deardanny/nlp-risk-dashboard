@@ -1,11 +1,20 @@
 # NLP-Powered Risk Management Dashboard
 
-An end-to-end NLP pipeline built at Kimberly-Clark AI Labs (2021–2024) to replace a $500,000/year third-party social listening vendor with an in-house GPT-4 powered system.
+An in-house NLP and LLM platform developed at Kimberly-Clark (Yuhan-Kimberly) AI Labs (2021–2024) to turn consumer feedback into product insights and earlier quality-risk signals.
 
-## Results
-- 80% → 95% classification accuracy (upgraded from RoBERTa to fine-tuned GPT-4)
-- 90% reduction in vendor costs
-- Adopted by APAC and US teams as a regional standard
+[Case study and dashboard demo](https://hdjang.com/projects/risk/)
+
+## Results reported in the project poster
+
+| Measure | Reported result |
+| --- | --- |
+| Product-attribute and sentiment classification accuracy | Vendor **60%** → RoBERTa **80%** → GPT-4o **90%** |
+| Annual external spend | Approximately **US$500,000 → US$33,000**, or **93% lower** |
+| Issue-response cycle through completed factory correction | Approximately **90 days → 3 days** |
+
+Led implementation, training, maintenance, and ad hoc analysis. Presented the platform to US/APAC leadership for planned expansion.
+
+These are project-reported results from *Consumer Insights & Risk Management: From Consumer Reviews to Business Insights and Faster Action*, by Daniel (Heedong) Jang. The poster cites presenter records and the dashboard guide (2024). Annual external spend compares historical vendor-platform fees with estimated crawling costs on the same USD basis; it excludes internal labor and cloud costs. The 90-to-3-day measure covers the issue-response cycle through completed factory correction, not model inference time. The figures describe the project evaluation; the public notebooks do not include the original evaluation data.
 
 ## Overview
 
