@@ -4,11 +4,24 @@ import json
 from pathlib import Path
 import re
 import unittest
+from unittest.mock import Mock
 
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOKS = ['brand-classification.ipynb', 'brand-classification_en.ipynb']
+
+
+def read_posts(name, rows):
+    notebook = json.loads((ROOT / name).read_text())
+    source = next(''.join(c['source']) for c in notebook['cells']
+                  if c['cell_type'] == 'code' and 'content_query = ' in ''.join(c['source']))
+    cursor = Mock()
+    cursor.execute.return_value = iter(rows)
+    namespace = {'pd': pd, 'cur': cursor, 'five_days_ago': '2026-01-01',
+                 'five_days_ago_str': '2026-01-01'}
+    exec(compile(source, name, 'exec'), namespace)
+    return namespace['content']
 
 
 def expand_posts(name, posts):
@@ -30,6 +43,33 @@ def expand_posts(name, posts):
 
 
 class BrandExpansionTests(unittest.TestCase):
+    def test_empty_query_result_reaches_brand_processing(self):
+        for name in NOTEBOOKS:
+            with self.subTest(notebook=name):
+                posts = read_posts(name, [])
+                self.assertTrue(posts.empty)
+                self.assertEqual(len(posts.columns), 16)
+                self.assertTrue({'CONTENTS', 'TITLE', 'YEAR', 'MONTH'} <= set(posts.columns))
+                result = expand_posts(name, posts)
+                self.assertTrue(result.empty)
+                self.assertTrue({'BRAND', 'UNIQUE_ID', 'RISK_YN'} <= set(result.columns))
+
+    def test_nonempty_query_preserves_fields_and_date_features(self):
+        row = (7, 'demo-7', 'Demo board', 'Demo community', 'Huggies example',
+               None, None, 'Demo author', 'https://example.com/post/7',
+               '2026-01-03', '2026-01-04', 10, 2, 1)
+        for name in NOTEBOOKS:
+            with self.subTest(notebook=name):
+                posts = read_posts(name, [row])
+                self.assertEqual(posts.loc[0, 'CONTENTS'], '')
+                self.assertEqual(posts.loc[0, 'WDATE'], '2026-01-03')
+                self.assertEqual(posts.loc[0, 'RDATE'], '2026-01-04')
+                self.assertEqual(posts.loc[0, 'YEAR'], 2026)
+                self.assertEqual(posts.loc[0, 'MONTH'], 1)
+                self.assertEqual(posts.loc[0, 'VIEWS'], 10)
+                result = expand_posts(name, posts)
+                self.assertEqual(result['UNIQUE_ID'].tolist(), ['7-Huggies'])
+
     def test_no_brand_matches_keeps_an_empty_valid_schema(self):
         posts = pd.DataFrame([{'SEQ': 1, 'TITLE': 'Fictional daily note',
                                'CONTENTS': 'A quiet afternoon.', 'MEDIA': None}])
